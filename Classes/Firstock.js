@@ -53,7 +53,7 @@ class Firstock extends AFirstock {
         );
       })
       .catch((error) => {
-        callBack(error.message, null);
+        callBack(error.response.data, null);
       });
   }
   logout(callBack) {
@@ -87,7 +87,7 @@ class Firstock extends AFirstock {
             );
           })
           .catch((error) => {
-            callBack(error.message, null);
+            callBack(error.response.data, null);
           });
       }
     });
@@ -110,7 +110,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            callBack(error.message, null);
+            callBack(error.response.data, null);
           });
       }
     });

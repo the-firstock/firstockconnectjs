@@ -1,13 +1,13 @@
-const Firstock = require("../thefirstock_nodejs/Classes/Firstock");
+const Firstock = require("./Classes/Firstock");
 
 const firstock = new Firstock();
 
 const userDetails = {
-    userId:"",
-    password:"",
-    TOTP:"",
-    vendorCode:"",
-    apiKey
+  userId:"",
+  password:"",
+  TOTP:"",
+  vendorCode:"",
+  apiKey:""
 }
 
 
