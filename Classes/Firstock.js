@@ -5,6 +5,7 @@ const WebSocket = require("ws");
 const Commonfunctions = require("../shared/Commonfunctions");
 const CONSTANT = require("../shared/Constant");
 
+
 let axiosInterceptor = axios.create({
   baseURL: CONSTANT.API_LINK,
 });
@@ -677,7 +678,6 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-        
             callBack(error.response.data, null);
           });
       }
