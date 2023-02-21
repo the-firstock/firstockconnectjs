@@ -2,6 +2,8 @@ const Firstock = require("./Classes/Firstock");
 
 const firstock = new Firstock();
 
+let orderNumber=""
+
 const userDetails = {
   userId:"",
   password:"",
@@ -32,6 +34,7 @@ const userDetails = {
 // firstock.getUserDetails((err, result) => {
 //   console.log("Error, ", err)
 //   console.log("Result: ", result)
+  
 // })
 
 // firstock.placeOrder(
@@ -48,68 +51,63 @@ const userDetails = {
 //     remarks: "Add market protection",
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("placeOrder Error, ", err);
+//     console.log("placeOrder Result: ", result);
 //     orderNumber = result.data.orderNumber
 //   }
 // );
-
-firstock.placeOrder(
-  {
-    exchange: "NSE",
-    tradingSymbol: "ITC-EQ",
-    quantity: "1",
-    price: "300",
-    product: "I",
-    transactionType: "B",
-    priceType: "MKT",
-    retention: "DAY",
-    triggerPrice: "",
-    remarks: "Add market protection",
-  },
-  (err, result) => {
-    console.log("Error, ", err);
-    console.log("Place Result: ", result);
-    orderNumber = result.data.orderNumber;
-    modifyOrder(orderNumber);
-  }
-);
-
-const modifyOrder = (orderNumber) => {
-  firstock.modifyOrder(
-    {
-      orderNumber: orderNumber,
-      price: "301",
-      quantity: "1",
-      triggerPrice: "301",
-      tradingSymbol: "ITC-EQ",
-      exchange: "NSE",
-      priceType: "LMT",
-    },
-    (err, result) => {
-      console.log("Error, ", err);
-      console.log("modifyOrder Result: ", result);
-      singleOrderHistory(orderNumber)
-    }
-  );
-};
-
-const cancelOrder = (orderNumber) => {
-  firstock.cancelOrder({ orderNumber: orderNumber }, (err, result) => {
-    console.log("Error, ", err);
-    console.log("Cancel Result: ", result);
-  });
-};
-
-const singleOrderHistory = (orderNumber) =>{
-  firstock.singleOrderHistory({ orderNumber: orderNumber }, (err, result) => {
-    console.log("Error, ", err)
-    console.log("singleOrderHistory Result: ", result)
-    cancelOrder(orderNumber)
-})
-}
-
-// firstock.orderMargin({
+//  firstock.placeOrder(
+//    {
+//      exchange: "NSE",
+//      tradingSymbol: "ITC-EQ",
+//      quantity: "1",
+//      price: "300",
+//      product: "I",
+//      transactionType: "B",
+//      priceType: "MKT",
+//      retention: "DAY",
+//      triggerPrice: "",
+//      remarks: "Add market protection",
+//    },
+//    (err, result) => {
+//      console.log("Error, ", err);
+//      console.log("Place Result: ", result);
+//      orderNumber = result.data.orderNumber;
+//      modifyOrder(orderNumber);
+//    }
+//  );
+//  const modifyOrder = (orderNumber) => {
+//    firstock.modifyOrder(
+//      {
+//        orderNumber: orderNumber,
+//        price: "301",
+//        quantity: "1",
+//        triggerPrice: "301",
+//        tradingSymbol: "ITC-EQ",
+//        exchange: "NSE",
+//        priceType: "LMT",
+//      },
+//      (err, result) => {
+//        console.log("Error, ", err);
+//        console.log("modifyOrder Result: ", result);
+//        singleOrderHistory(orderNumber)
+//      }
+//    );
+//  };
+//  const cancelOrder = (orderNumber) => {
+//    firstock.cancelOrder({ orderNumber: orderNumber }, (err, result) => {
+//      console.log("Error, ", err);
+//      console.log("Cancel Result: ", result);
+//    });
+//  };
+//  const singleOrderHistory = (orderNumber) =>{
+//    firstock.singleOrderHistory({ orderNumber: orderNumber }, (err, result) => {
+//      console.log("Error, ", err)
+//      console.log("singleOrderHistory Result: ", result)
+//      cancelOrder(orderNumber)
+//  })
+//  }
+  // firstock.orderMargin({
 //     exchange:"NSE",
 //     tradingSymbol:"ITC-EQ",
 //     quantity:"1",
@@ -118,54 +116,56 @@ const singleOrderHistory = (orderNumber) =>{
 //     transactionType:"B",
 //     priceType:"LMT",
 // },(err, result)=>{
-//     console.log("Error, ", err)
-//     console.log("Result: ", result)
+//     console.log("orderMargin Error, ", err)
+//     console.log("orderMargin Result: ", result)
 // })
 
 // firstock.orderBook((err, result)=>{
 //     console.log("Error, ",err)
-//     console.log("Result: ",result)
+//     console.log("orderBook Result: ",result)
 // })
 
-// firstock.singleOrderHistory({ orderNumber: "22120600013252" }, (err, result) => {
-//     console.log("Error, ", err)
-//     console.log("Result: ", result)
+// firstock.singleOrderHistory({ orderNumber: "a22120600013252" }, (err, result) => {
+//     console.log("singleOrderHistory Error, ", err)
+//     console.log("singleOrderHistory Result: ", result)
 // })
 
-//getting error 401
-// firstock.tradeBook((err, result)=>{
-//     console.log("Error, ",err)
-//     console.log("Result: ",result)
-// })
+// ################################################################################################################################################################
 
 //getting error 401
+firstock.tradeBook((err, result)=>{
+    console.log("tradeBook Error, ",err)
+    console.log("tradeBook Result: ",result)
+})
+
+// getting error 401
 // firstock.positionsBook((err, result)=>{
 //     console.log("Error, ",err)
 //     console.log("Result: ",result)
 // })
-
 //getting error 401
 // firstock.productConversion({
-//     exchange: "NSE",
-//     tradingSymbol: "ITC-EQ",
-//     quantity: "1",
+//     exchange: "NFO",
+//     tradingSymbol: "NIFTY",
+//     quantity: "250",
 //     product: "C",
 //     previousProduct: "I",
 //     transactionType: "B",
 //     positionType: "DAY"
 // }, (err, result) => {
-//     console.log("Error, ", err)
-//     console.log("Result: ", result)
+//   debugger
+//     console.log("productConversion Error, ", err)
+//     console.log("productConversion Result: ", result)
 // })
 
 // firstock.holdings({ product: "C" }, (err, result) => {
 //     console.log("Error, ", err)
-//     console.log("Result: ", result)
+//     console.log("holdings Result: ", result)
 // })
 
 // firstock.limits((err, result)=>{
 //     console.log("Error, ",err)
-//     console.log("Result: ",result)
+//     console.log("limits Result: ",result)
 // })
 
 // firstock.getQuotes(
@@ -174,10 +174,12 @@ const singleOrderHistory = (orderNumber) =>{
 //     token: "26000",
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("getQuotes Error, ", err);
+//     console.log("getQuotes Result: ", result);
 //   }
 // );
+
+// ######################################
 
 // firstock.searchScripts({ stext: "ITC" }, (err, result) => {
 //   console.log("Error, ", err);
@@ -191,7 +193,7 @@ const singleOrderHistory = (orderNumber) =>{
 //   },
 //   (err, result) => {
 //     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("getSecurityInfo Result: ", result);
 //   }
 // );
 
@@ -203,7 +205,7 @@ const singleOrderHistory = (orderNumber) =>{
 //getting 401 error
 // firstock.getOptionChain(
 //   {
-//     tradingSymbol: "BANKNIFTY22SEP22C40000",
+//     tradingSymbol: "NIFTY23FEB23P17000",
 //     exchange: "NFO",
 //     strikePrice: "40000",
 //     count: "5",
@@ -216,30 +218,30 @@ const singleOrderHistory = (orderNumber) =>{
 
 //getting error 401
 // firstock.spanCalculator(
-//   [
-//     {
-//       exchange: "NFO",
-//       instname: "",
-//       symbolName: "NIFTY",
-//       expd: "08-DEC-2022",
-//       optt: "CE",
-//       strikePrice: "17000",
-//       netQuantity: "50",
-//     },
-//     {
-//       exchange: "NFO",
-//       instname: "",
-//       symbolName: "BANKNIFTY",
-//       expd: "08-DEC-2022",
-//       optt: "PE",
-//       strikePrice: "40000",
-//       netQuantity: "-25",
-//     },
-//   ],
-//   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
-//   }
+  // [
+  //   {
+  //     exchange: "NFO",
+  //     instrumentName: "",
+  //     symbolName: "NIFTY",
+  //     expireDate: "23-FEB-2023",
+  //     optionType: "CE",
+  //     strikePrice: "17000",
+  //     netQuantity: "50"
+  //   },
+  //   {
+  //     exchange: "NFO",
+  //     instrumentName: "",
+  //     symbolName: "BANKNIFTY",
+  //     expireDate: "23-FEB-2023",
+  //     optionType: "PE",
+  //     strikePrice: "40000",
+  //     netQuantity: "-25"
+  //   }
+  // ],
+  // (err, result) => {
+  //   console.log("Error, ", err);
+  //   console.log("Result: ", result);
+  // }
 // );
 
 // firstock.timePriceSeries(
@@ -263,9 +265,9 @@ const singleOrderHistory = (orderNumber) =>{
 //       tradingSymbol:"SAIL27OCT22P99",
 //       quantity:"25",
 //       transactionType:"S",
-//       price,
-//       product,
-//       priceType,
+//       price:"100000",
+//       product:"M",
+//       priceType:"LMT",
 
 //     data: [
 //       {
