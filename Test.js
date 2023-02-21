@@ -133,10 +133,10 @@ const userDetails = {
 // ################################################################################################################################################################
 
 //getting error 401
-firstock.tradeBook((err, result)=>{
-    console.log("tradeBook Error, ",err)
-    console.log("tradeBook Result: ",result)
-})
+// firstock.tradeBook((err, result)=>{
+//     console.log("tradeBook Error, ",err)
+//     console.log("tradeBook Result: ",result)
+// })
 
 // getting error 401
 // firstock.positionsBook((err, result)=>{

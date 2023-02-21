@@ -289,8 +289,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            debugger
-            callBack(error.message, null);
+            callBack(error.response.data, null);
           });
       }
     });
@@ -326,7 +325,7 @@ class Firstock extends AFirstock {
       } else {
         const userId = data.userId || this.userId;
         const jKey = data.token || this.token;
-        debugger
+      
         axiosInterceptor
           .post(`tradeBook`, {
             userId,
@@ -351,7 +350,7 @@ class Firstock extends AFirstock {
       } else {
         const userId = data.userId || this.userId;
         const jKey = data.token || this.token;
-        debugger
+  
         axiosInterceptor
           .post(`positionBook`, {
             userId,
@@ -419,7 +418,7 @@ class Firstock extends AFirstock {
         
         const userId = data.userId || this.userId;
         const jKey = data.token || this.token;
-        debugger
+        
         axiosInterceptor
           .post(`holdings`, {
             userId,
@@ -433,7 +432,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            debugger
+    
             callBack(error.response.data, null);
           });
       }
@@ -678,7 +677,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            debugger
+        
             callBack(error.response.data, null);
           });
       }
@@ -734,7 +733,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            callBack(error.message, null);
+            callBack(error.response.data, null);
           });
       }
     });
@@ -775,7 +774,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            callBack(error.message, null);
+            callBack(error.response.data, null);
           });
       }
     });
@@ -816,7 +815,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            callBack(error.message, null);
+            callBack(error.response.data, null);
           });
       }
     });
@@ -856,7 +855,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            callBack(error.message, null);
+            callBack(error.response.data, null);
           });
       }
     });
@@ -887,7 +886,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            callBack(error.message, null);
+            callBack(error.response.data, null);
           });
       }
     });
@@ -929,7 +928,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            callBack(error.message, null);
+            callBack(error.response.data, null);
           });
       }
     });
@@ -973,7 +972,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            callBack(error.message, null);
+            callBack(error.response.data, null);
           });
       }
     });
