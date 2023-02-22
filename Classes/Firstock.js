@@ -766,7 +766,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
           })
           .then((response) => {
             const { data } = response;
@@ -807,7 +807,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
           })
           .then((response) => {
             const { data } = response;
@@ -848,7 +848,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
           })
           .then((response) => {
             const { data } = response;
@@ -879,7 +879,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
           })
           .then((response) => {
             const { data } = response;
@@ -919,7 +919,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
             hedge,
             hedgeValue,
           })
@@ -963,7 +963,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
             hedge,
             hedgeValue,
           })

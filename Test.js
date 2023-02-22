@@ -301,7 +301,7 @@ const userDetails = {
 //   {
 //     data: [
 //       {
-//         exchange: "",
+//         exchange: "NSE",
 //         tradingSymbol: "ITC-EQ",
 //         quantity: "1",
 //         price: "0",
@@ -320,21 +320,21 @@ const userDetails = {
 //   }
 // );
 
-firstock.bearPutSpread(
-  {
-    symbol: "NIFTY",
-    putBuyStrikePrice: "17500",
-    putSellStrikePrice: "17500",
-    expiry: "23FEB23",
-    product: "C",
-    quantity: "1",
-    remarks: "BearPutSpread",
-  },
-  (err, result) => {
-    console.log("bearPutSpread Error, ", err);
-    console.log("bearPutSpread Result: ", result);
-  }
-);
+// firstock.bearPutSpread(
+//   {
+//     symbol: "NIFTY",
+//     putBuyStrikePrice: "17500",
+//     putSellStrikePrice: "17500",
+//     expiry: "23FEB23",
+//     product: "C",
+//     quantity: "1",
+//     remarks: "BearPutSpread",
+//   },
+//   (err, result) => {
+//     console.log("bearPutSpread Error, ", err);
+//     console.log("bearPutSpread Result: ", result);
+//   }
+// );
 
 // firstock.bullCallSpread(
 //   {
@@ -372,14 +372,14 @@ firstock.bearPutSpread(
 //   {
 //     symbol: "NIFTY",
 //     strikePrice: "17000",
-//     expiry: "08DEC22",
+//     expiry: "23FEB23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "longStraddle",
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("longStraddle Error, ", err);
+//     console.log("longStraddle Result: ", result);
 //   }
 // );
 
@@ -387,7 +387,7 @@ firstock.bearPutSpread(
 //   {
 //     symbol: "NIFTY",
 //     strikePrice: "17000",
-//     expiry: "08DEC22",
+//     expiry: "23FEB23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "ShortStraddleWithoutHedge",
@@ -395,8 +395,8 @@ firstock.bearPutSpread(
 //     hedgeValue: 300,
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("shortStraddle Error, ", err);
+//     console.log("shortStraddle Result: ", result);
 //   }
 // );
 
@@ -405,7 +405,7 @@ firstock.bearPutSpread(
 //     symbol: "NIFTY",
 //     callStrikePrice: "17500",
 //     putStrikePrice: "17000",
-//     expiry: "08DEC22",
+//     expiry: "23FEB23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "ShortStrangleWithOutHedge",
@@ -424,6 +424,7 @@ firstock.bearPutSpread(
 //     firstock.getWebSocketDetails((err, result) => {
 //     if (!err) {
 //         ws.send(result)
+//         console.log("is open")
 //     }
 //     })
 // });
@@ -434,7 +435,7 @@ firstock.bearPutSpread(
 
 // ws.on('message', function message(data) {
 //     const result = firstock.receiveWebSocketDetails(data)
-//     console.log('Result: ', result)
+//     console.log('initializeWebSocket Result: ', result)
 //     ws.send(firstock.subscribeTouchline("NSE|26000#NSE|26009#NSE|26017"))
 // });
 
