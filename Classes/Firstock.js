@@ -5,6 +5,7 @@ const WebSocket = require("ws");
 const Commonfunctions = require("../shared/Commonfunctions");
 const CONSTANT = require("../shared/Constant");
 
+
 let axiosInterceptor = axios.create({
   baseURL: CONSTANT.API_LINK,
 });
@@ -677,7 +678,6 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-        
             callBack(error.response.data, null);
           });
       }
@@ -766,7 +766,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
           })
           .then((response) => {
             const { data } = response;
@@ -807,7 +807,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
           })
           .then((response) => {
             const { data } = response;
@@ -848,7 +848,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
           })
           .then((response) => {
             const { data } = response;
@@ -879,7 +879,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
           })
           .then((response) => {
             const { data } = response;
@@ -919,7 +919,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
             hedge,
             hedgeValue,
           })
@@ -963,7 +963,7 @@ class Firstock extends AFirstock {
             quantity,
             remarks,
             jKey,
-            actId: userId,
+            userId: userId,
             hedge,
             hedgeValue,
           })

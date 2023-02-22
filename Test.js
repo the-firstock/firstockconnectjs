@@ -2,15 +2,15 @@ const Firstock = require("./Classes/Firstock");
 
 const firstock = new Firstock();
 
-let orderNumber=""
+let orderNumber = "";
 
 const userDetails = {
-  userId:"",
-  password:"",
-  TOTP:"",
-  vendorCode:"",
-  apiKey:""
-}
+  userId: "",
+  password: "",
+  TOTP: "",
+  vendorCode: "",
+  apiKey: "",
+};
 
 // firstock.login(
 //   {
@@ -34,7 +34,7 @@ const userDetails = {
 // firstock.getUserDetails((err, result) => {
 //   console.log("Error, ", err)
 //   console.log("Result: ", result)
-  
+
 // })
 
 // firstock.placeOrder(
@@ -107,7 +107,7 @@ const userDetails = {
 //      cancelOrder(orderNumber)
 //  })
 //  }
-  // firstock.orderMargin({
+// firstock.orderMargin({
 //     exchange:"NSE",
 //     tradingSymbol:"ITC-EQ",
 //     quantity:"1",
@@ -179,8 +179,6 @@ const userDetails = {
 //   }
 // );
 
-// ######################################
-
 // firstock.searchScripts({ stext: "ITC" }, (err, result) => {
 //   console.log("Error, ", err);
 //   console.log("Result: ", result);
@@ -192,14 +190,14 @@ const userDetails = {
 //     token: "26000",
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
+//     console.log("getSecurityInfo Error, ", err);
 //     console.log("getSecurityInfo Result: ", result);
 //   }
 // );
 
 // firstock.getIndexList({exchange: "NSE"},(err, result)=>{
-//     console.log("Error, ", err)
-//     console.log("Result: ", result)
+//     console.log(" getIndexList Error, ", err)
+//     console.log("getIndexList Result: ", result)
 //     })
 
 //getting 401 error
@@ -211,37 +209,37 @@ const userDetails = {
 //     count: "5",
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("getOptionChain Error, ", err);
+//     console.log("getOptionChain Result: ", result);
 //   }
 // );
 
 //getting error 401
 // firstock.spanCalculator(
-  // [
-  //   {
-  //     exchange: "NFO",
-  //     instrumentName: "",
-  //     symbolName: "NIFTY",
-  //     expireDate: "23-FEB-2023",
-  //     optionType: "CE",
-  //     strikePrice: "17000",
-  //     netQuantity: "50"
-  //   },
-  //   {
-  //     exchange: "NFO",
-  //     instrumentName: "",
-  //     symbolName: "BANKNIFTY",
-  //     expireDate: "23-FEB-2023",
-  //     optionType: "PE",
-  //     strikePrice: "40000",
-  //     netQuantity: "-25"
-  //   }
-  // ],
-  // (err, result) => {
-  //   console.log("Error, ", err);
-  //   console.log("Result: ", result);
-  // }
+//   [
+//     {
+//       exchange: "NFO",
+//       instrumentName: "",
+//       symbolName: "NIFTY",
+//       expireDate: "23-FEB-2023",
+//       optionType: "CE",
+//       strikePrice: "17000",
+//       netQuantity: "50"
+//     },
+//     {
+//       exchange: "NFO",
+//       instrumentName: "",
+//       symbolName: "BANKNIFTY",
+//       expireDate: "23-FEB-2023",
+//       optionType: "PE",
+//       strikePrice: "40000",
+//       netQuantity: "-25"
+//     }
+//   ],
+//   (err, result) => {
+//     console.log("spanCalculator Error, ", err);
+//     console.log("spanCalculator Result: ", result);
+//   }
 // );
 
 // firstock.timePriceSeries(
@@ -253,45 +251,45 @@ const userDetails = {
 //     intrv: "3",
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("timePriceSeries Error, ", err);
+//     console.log("timePriceSeries Result: ", result);
 //   }
 // );
 
-//getting error
+// getting error
 // firstock.basketMargin(
 //   {
-//     exchange:"NFO",
-//       tradingSymbol:"SAIL27OCT22P99",
-//       quantity:"25",
-//       transactionType:"S",
-//       price:"100000",
-//       product:"M",
-//       priceType:"LMT",
+//     exchange: "NFO",
+//     tradingSymbol: "NIFTY23FEB23C19000",
+//     quantity: "50",
+//     transactionType: "S",
+//     price: "0",
+//     product: "M",
+//     priceType: "LMT",
 
 //     data: [
 //       {
 //         exchange: "NFO",
-//         tradingSymbol: "SAIL27OCT22P99",
+//         tradingSymbol: "NIFTY23FEB23C19000",
 //         quantity: "25",
 //         transactionType: "S",
 //       },
 //     ],
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("basketMargin Error, ", err);
+//     console.log("basketMargin Result: ", result);
 //   }
 // );
 
 // firstock.optionGreek(
 //   {
-//     expiryDate: "8-DEC-2022",
-//     strikePrice: "42000",
-//     spotPrice: "39546",
-//     initRate: "10",
-//     volatility: "",
-//     optionType: "",
+//     expiryDate:'23-FEB-2023',
+//     strikePrice:'39000',
+//     spotPrice:'38850',
+//     initRate:'7',
+//     volatility:'20',
+//     optionType:'PE',
 //   },
 //   (err, result) => {
 //     console.log("Error, ", err);
@@ -317,8 +315,8 @@ const userDetails = {
 //     ],
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("multiPlaceOrder Error, ", err);
+//     console.log("multiPlaceOrder Result: ", result);
 //   }
 // );
 
@@ -327,14 +325,14 @@ const userDetails = {
 //     symbol: "NIFTY",
 //     putBuyStrikePrice: "17500",
 //     putSellStrikePrice: "17500",
-//     expiry: "08DEC22",
+//     expiry: "23FEB23",
 //     product: "C",
 //     quantity: "1",
 //     remarks: "BearPutSpread",
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("bearPutSpread Error, ", err);
+//     console.log("bearPutSpread Result: ", result);
 //   }
 // );
 
@@ -343,14 +341,14 @@ const userDetails = {
 //     symbol: "NIFTY",
 //     callBuyStrikePrice: "18000",
 //     callSellStrikePrice: "17000",
-//     expiry: "08DEC22",
+//     expiry: "23FEB23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "BullCallSpread",
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("bullCallSpread Error, ", err);
+//     console.log("bullCallSpread Result: ", result);
 //   }
 // );
 
@@ -359,14 +357,14 @@ const userDetails = {
 //     symbol: "NIFTY",
 //     callStrikePrice: "18000",
 //     putStrikePrice: "17000",
-//     expiry: "08DEC22",
+//     expiry: "23FEB23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "longStrangle",
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("longStrangle Error, ", err);
+//     console.log("longStrangle Result: ", result);
 //   }
 // );
 
@@ -374,14 +372,14 @@ const userDetails = {
 //   {
 //     symbol: "NIFTY",
 //     strikePrice: "17000",
-//     expiry: "08DEC22",
+//     expiry: "23FEB23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "longStraddle",
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("longStraddle Error, ", err);
+//     console.log("longStraddle Result: ", result);
 //   }
 // );
 
@@ -389,7 +387,7 @@ const userDetails = {
 //   {
 //     symbol: "NIFTY",
 //     strikePrice: "17000",
-//     expiry: "08DEC22",
+//     expiry: "23FEB23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "ShortStraddleWithoutHedge",
@@ -397,8 +395,8 @@ const userDetails = {
 //     hedgeValue: 300,
 //   },
 //   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
+//     console.log("shortStraddle Error, ", err);
+//     console.log("shortStraddle Result: ", result);
 //   }
 // );
 
@@ -407,7 +405,7 @@ const userDetails = {
 //     symbol: "NIFTY",
 //     callStrikePrice: "17500",
 //     putStrikePrice: "17000",
-//     expiry: "08DEC22",
+//     expiry: "23FEB23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "ShortStrangleWithOutHedge",
@@ -426,6 +424,7 @@ const userDetails = {
 //     firstock.getWebSocketDetails((err, result) => {
 //     if (!err) {
 //         ws.send(result)
+//         console.log("is open")
 //     }
 //     })
 // });
@@ -436,7 +435,7 @@ const userDetails = {
 
 // ws.on('message', function message(data) {
 //     const result = firstock.receiveWebSocketDetails(data)
-//     console.log('Result: ', result)
+//     console.log('initializeWebSocket Result: ', result)
 //     ws.send(firstock.subscribeTouchline("NSE|26000#NSE|26009#NSE|26017"))
 // });
 
