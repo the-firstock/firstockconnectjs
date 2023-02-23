@@ -695,6 +695,7 @@ class Firstock extends AFirstock {
         const jKey = data.token || this.token;
         axiosInterceptor
           .post(`optionGreek`, {
+            userId,
             expiryDate,
             strikePrice,
             spotPrice,
