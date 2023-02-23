@@ -34,7 +34,6 @@ const userDetails = {
 // firstock.getUserDetails((err, result) => {
 //   console.log("Error, ", err)
 //   console.log("Result: ", result)
-
 // })
 
 // firstock.placeOrder(
@@ -56,6 +55,8 @@ const userDetails = {
 //     orderNumber = result.data.orderNumber
 //   }
 // );
+
+
 //  firstock.placeOrder(
 //    {
 //      exchange: "NSE",
@@ -132,18 +133,18 @@ const userDetails = {
 
 // ################################################################################################################################################################
 
-//getting error 401
+
 // firstock.tradeBook((err, result)=>{
 //     console.log("tradeBook Error, ",err)
 //     console.log("tradeBook Result: ",result)
 // })
 
-// getting error 401
+
 // firstock.positionsBook((err, result)=>{
 //     console.log("Error, ",err)
 //     console.log("Result: ",result)
 // })
-//getting error 401
+
 // firstock.productConversion({
 //     exchange: "NFO",
 //     tradingSymbol: "NIFTY",
@@ -153,7 +154,7 @@ const userDetails = {
 //     transactionType: "B",
 //     positionType: "DAY"
 // }, (err, result) => {
-//   debugger
+ 
 //     console.log("productConversion Error, ", err)
 //     console.log("productConversion Result: ", result)
 // })
@@ -200,7 +201,7 @@ const userDetails = {
 //     console.log("getIndexList Result: ", result)
 //     })
 
-//getting 401 error
+
 // firstock.getOptionChain(
 //   {
 //     tradingSymbol: "NIFTY23FEB23P17000",
@@ -214,7 +215,7 @@ const userDetails = {
 //   }
 // );
 
-//getting error 401
+
 // firstock.spanCalculator(
 //   [
 //     {
@@ -244,11 +245,11 @@ const userDetails = {
 
 // firstock.timePriceSeries(
 //   {
-//     exchange: "NFO",
-//     token: "37517",
-//     endtime: "09/09/2022 15:29:00",
-//     starttime: "09/09/2022 09:20:00",
-//     intrv: "3",
+//     exchange: "NSE",
+//     token: "22",
+//     endTime: "22/02/2023 09:20:00",
+//     startTime: "21/02/2023 15:29:00",
+//     interval: "3",
 //   },
 //   (err, result) => {
 //     console.log("timePriceSeries Error, ", err);
@@ -256,23 +257,27 @@ const userDetails = {
 //   }
 // );
 
-// getting error
+
 // firstock.basketMargin(
 //   {
-//     exchange: "NFO",
-//     tradingSymbol: "NIFTY23FEB23C19000",
-//     quantity: "50",
-//     transactionType: "S",
-//     price: "0",
-//     product: "M",
-//     priceType: "LMT",
-
-//     data: [
+//     basket: [
 //       {
-//         exchange: "NFO",
-//         tradingSymbol: "NIFTY23FEB23C19000",
-//         quantity: "25",
+//         exchange: "NSE",
+//         tradingSymbol: "NESTLEIND-EQ",
+//         quantity: "1",
 //         transactionType: "S",
+//         price: "1200",
+//         product: "I",
+//         priceType: "LMT",
+//       },
+//       {
+//         exchange: "NSE",
+//         tradingSymbol: "NESTLEIND-EQ",
+//         quantity: "1",
+//         transactionType: "S",
+//         price: "1300",
+//         product: "I",
+//         priceType: "LMT",
 //       },
 //     ],
 //   },
@@ -284,12 +289,12 @@ const userDetails = {
 
 // firstock.optionGreek(
 //   {
-//     expiryDate:'23-FEB-2023',
-//     strikePrice:'39000',
-//     spotPrice:'38850',
-//     initRate:'7',
-//     volatility:'20',
-//     optionType:'PE',
+//     expiryDate: "23-FEB-2023",
+//     strikePrice: "17000",
+//     spotPrice: "17890",
+//     initRate: "10",
+//     volatility: "20",
+//     optionType: "PE",
 //   },
 //   (err, result) => {
 //     console.log("Error, ", err);
