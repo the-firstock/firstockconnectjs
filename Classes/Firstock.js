@@ -612,7 +612,7 @@ class Firstock extends AFirstock {
       }
     });
   }
-  timePriceSeries({ exchange, token, endtime, starttime, intrv }, callBack) {
+  timePriceSeries({ exchange, token, endTime, startTime, interval }, callBack) {
     Commonfunctions.readData((err, data) => {
       if (err) {
         callBack(err, null);
@@ -625,9 +625,9 @@ class Firstock extends AFirstock {
             jKey,
             exchange,
             token,
-            endtime,
-            starttime,
-            intrv,
+            endTime,
+            startTime,
+            interval,
           })
           .then((response) => {
             const { data } = response;
@@ -642,14 +642,7 @@ class Firstock extends AFirstock {
   }
   basketMargin(
     {
-      exchange,
-      tradingSymbol,
-      quantity,
-      transactionType,
-      price,
-      product,
-      priceType,
-      data,
+      basket,
     },
     callBack
   ) {
@@ -663,14 +656,7 @@ class Firstock extends AFirstock {
           .post(`basketMargin`, {
             userId,
             jKey,
-            exchange,
-            tradingSymbol,
-            quantity,
-            transactionType,
-            price,
-            product,
-            priceType,
-            data,
+            basket
           })
           .then((response) => {
             const { data } = response;
@@ -695,6 +681,7 @@ class Firstock extends AFirstock {
         const jKey = data.token || this.token;
         axiosInterceptor
           .post(`optionGreek`, {
+            userId,
             expiryDate,
             strikePrice,
             spotPrice,
