@@ -642,14 +642,7 @@ class Firstock extends AFirstock {
   }
   basketMargin(
     {
-      exchange,
-      tradingSymbol,
-      quantity,
-      transactionType,
-      price,
-      product,
-      priceType,
-      data,
+      basket,
     },
     callBack
   ) {
@@ -663,14 +656,7 @@ class Firstock extends AFirstock {
           .post(`basketMargin`, {
             userId,
             jKey,
-            exchange,
-            tradingSymbol,
-            quantity,
-            transactionType,
-            price,
-            product,
-            priceType,
-            data,
+            basket
           })
           .then((response) => {
             const { data } = response;
