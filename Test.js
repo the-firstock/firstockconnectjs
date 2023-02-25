@@ -5,11 +5,11 @@ const firstock = new Firstock();
 let orderNumber = "";
 
 const userDetails = {
-  userId: "",
-  password: "",
-  TOTP: "",
-  vendorCode: "",
-  apiKey: "",
+  userId: "CM2096",
+  password: "Trade@13",
+  TOTP: "1996",
+  vendorCode: "CM2096_API",
+  apiKey: "b7e9f4d9b9588a12c574ae709fb8c47d",
 };
 
 // firstock.login(
@@ -55,7 +55,6 @@ const userDetails = {
 //     orderNumber = result.data.orderNumber
 //   }
 // );
-
 
 //  firstock.placeOrder(
 //    {
@@ -133,12 +132,10 @@ const userDetails = {
 
 // ################################################################################################################################################################
 
-
 // firstock.tradeBook((err, result)=>{
 //     console.log("tradeBook Error, ",err)
 //     console.log("tradeBook Result: ",result)
 // })
-
 
 // firstock.positionsBook((err, result)=>{
 //     console.log("Error, ",err)
@@ -154,7 +151,7 @@ const userDetails = {
 //     transactionType: "B",
 //     positionType: "DAY"
 // }, (err, result) => {
- 
+
 //     console.log("productConversion Error, ", err)
 //     console.log("productConversion Result: ", result)
 // })
@@ -201,10 +198,9 @@ const userDetails = {
 //     console.log("getIndexList Result: ", result)
 //     })
 
-
 // firstock.getOptionChain(
 //   {
-//     tradingSymbol: "NIFTY23FEB23P17000",
+//     tradingSymbol: "NIFTY02MAR23P17000",
 //     exchange: "NFO",
 //     strikePrice: "40000",
 //     count: "5",
@@ -215,17 +211,16 @@ const userDetails = {
 //   }
 // );
 
-
 // firstock.spanCalculator(
 //   [
 //     {
-//       exchange: "NFO",
-//       instrumentName: "",
-//       symbolName: "NIFTY",
-//       expireDate: "23-FEB-2023",
-//       optionType: "CE",
-//       strikePrice: "17000",
-//       netQuantity: "50"
+      // exchange: "NFO",
+      // instrumentName: "",
+      // symbolName: "NIFTY",
+      // expireDate: "23-FEB-2023",
+      // optionType: "CE",
+      // strikePrice: "17000",
+      // netQuantity: "50"
 //     },
 //     {
 //       exchange: "NFO",
@@ -249,14 +244,13 @@ const userDetails = {
 //     token: "22",
 //     endTime: "22/02/2023 09:20:00",
 //     startTime: "21/02/2023 15:29:00",
-//     interval: "3",
+//     interval: "1",
 //   },
 //   (err, result) => {
 //     console.log("timePriceSeries Error, ", err);
 //     console.log("timePriceSeries Result: ", result);
 //   }
 // );
-
 
 // firstock.basketMargin(
 //   {
@@ -289,12 +283,12 @@ const userDetails = {
 
 // firstock.optionGreek(
 //   {
-//     expiryDate: "23-FEB-2023",
-//     strikePrice: "17000",
-//     spotPrice: "17890",
-//     initRate: "10",
-//     volatility: "20",
-//     optionType: "PE",
+    // expiryDate: "02-MAR-2023",
+    // strikePrice: "17000",
+    // spotPrice: "17890",
+    // initRate: "10",
+    // volatility: "20",
+    // optionType: "PE",
 //   },
 //   (err, result) => {
 //     console.log("Error, ", err);
@@ -330,7 +324,7 @@ const userDetails = {
 //     symbol: "NIFTY",
 //     putBuyStrikePrice: "17500",
 //     putSellStrikePrice: "17500",
-//     expiry: "23FEB23",
+//     expiry: "02MAR23",
 //     product: "C",
 //     quantity: "1",
 //     remarks: "BearPutSpread",
@@ -346,7 +340,7 @@ const userDetails = {
 //     symbol: "NIFTY",
 //     callBuyStrikePrice: "18000",
 //     callSellStrikePrice: "17000",
-//     expiry: "23FEB23",
+//     expiry: "02MAR23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "BullCallSpread",
@@ -357,27 +351,27 @@ const userDetails = {
 //   }
 // );
 
-// firstock.longStrangle(
-//   {
-//     symbol: "NIFTY",
-//     callStrikePrice: "18000",
-//     putStrikePrice: "17000",
-//     expiry: "23FEB23",
-//     product: "I",
-//     quantity: "1",
-//     remarks: "longStrangle",
-//   },
-//   (err, result) => {
-//     console.log("longStrangle Error, ", err);
-//     console.log("longStrangle Result: ", result);
-//   }
-// );
+firstock.longStrangle(
+  {
+    symbol: "NIFTY",
+    callStrikePrice: "18000",
+    putStrikePrice: "17000",
+    expiry: "23FEB23",
+    product: "I",
+    quantity: "1",
+    remarks: "longStrangle",
+  },
+  (err, result) => {
+    console.log("longStrangle Error, ", err);
+    console.log("longStrangle Result: ", result);
+  }
+);
 
 // firstock.longStraddle(
 //   {
 //     symbol: "NIFTY",
 //     strikePrice: "17000",
-//     expiry: "23FEB23",
+//     expiry: "02MAR23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "longStraddle",
@@ -392,7 +386,7 @@ const userDetails = {
 //   {
 //     symbol: "NIFTY",
 //     strikePrice: "17000",
-//     expiry: "23FEB23",
+//     expiry: "02MAR23",
 //     product: "I",
 //     quantity: "1",
 //     remarks: "ShortStraddleWithoutHedge",
@@ -405,23 +399,23 @@ const userDetails = {
 //   }
 // );
 
-// firstock.shortStrangle(
-//   {
-//     symbol: "NIFTY",
-//     callStrikePrice: "17500",
-//     putStrikePrice: "17000",
-//     expiry: "23FEB23",
-//     product: "I",
-//     quantity: "1",
-//     remarks: "ShortStrangleWithOutHedge",
-//     hedge: false,
-//     hedgeValue: 300,
-//   },
-//   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
-//   }
-// );
+firstock.shortStrangle(
+  {
+    symbol: "NIFTY",
+    callStrikePrice: "17500",
+    putStrikePrice: "17000",
+    expiry: "02MAR23",
+    product: "I",
+    quantity: "1",
+    remarks: "ShortStrangleWithOutHedge",
+    hedge: false,
+    hedgeValue: 300,
+  },
+  (err, result) => {
+    console.log("Error, ", err);
+    console.log("Result: ", result);
+  }
+);
 
 // const ws = firstock.initializeWebSocket();
 
@@ -444,4 +438,6 @@ const userDetails = {
 //     ws.send(firstock.subscribeTouchline("NSE|26000#NSE|26009#NSE|26017"))
 // });
 
-module.exports = Firstock;
+// module.exports = Firstock;
+
+
