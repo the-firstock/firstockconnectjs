@@ -941,7 +941,7 @@ class Firstock extends AFirstock {
         const userId = data.userId || this.userId;
         const jKey = data.token || this.token;
         axiosInterceptor
-          .post(`strategies/longStrangle`, {
+          .post(`strategies/shortStrangle`, {
             symbol,
             callStrikePrice,
             putStrikePrice,
