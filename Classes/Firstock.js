@@ -5,7 +5,6 @@ const WebSocket = require("ws");
 const Commonfunctions = require("../shared/Commonfunctions");
 const CONSTANT = require("../shared/Constant");
 
-
 let axiosInterceptor = axios.create({
   baseURL: CONSTANT.API_LINK,
 });
@@ -326,7 +325,7 @@ class Firstock extends AFirstock {
       } else {
         const userId = data.userId || this.userId;
         const jKey = data.token || this.token;
-      
+
         axiosInterceptor
           .post(`tradeBook`, {
             userId,
@@ -351,7 +350,7 @@ class Firstock extends AFirstock {
       } else {
         const userId = data.userId || this.userId;
         const jKey = data.token || this.token;
-  
+
         axiosInterceptor
           .post(`positionBook`, {
             userId,
@@ -416,10 +415,9 @@ class Firstock extends AFirstock {
       if (err) {
         callBack(err, null);
       } else {
-        
         const userId = data.userId || this.userId;
         const jKey = data.token || this.token;
-        
+
         axiosInterceptor
           .post(`holdings`, {
             userId,
@@ -433,7 +431,6 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-    
             callBack(error.response.data, null);
           });
       }
@@ -640,12 +637,7 @@ class Firstock extends AFirstock {
       }
     });
   }
-  basketMargin(
-    {
-      basket,
-    },
-    callBack
-  ) {
+  basketMargin({ basket }, callBack) {
     Commonfunctions.readData((err, dat) => {
       if (err) {
         callBack(err, null);
@@ -656,7 +648,7 @@ class Firstock extends AFirstock {
           .post(`basketMargin`, {
             userId,
             jKey,
-            basket
+            basket,
           })
           .then((response) => {
             const { data } = response;
@@ -1003,7 +995,7 @@ class Firstock extends AFirstock {
   subscribeFeedAcknowledgement(k) {
     const messageData = {
       t: "t",
-      k
+      k,
     };
     return JSON.stringify(messageData);
   }
@@ -1045,7 +1037,6 @@ class Firstock extends AFirstock {
   subscribeOrderAcknowledgement() {
     const messageData = {
       t: "ok",
-    
     };
     return JSON.stringify(messageData);
   }
@@ -1060,7 +1051,7 @@ class Firstock extends AFirstock {
     return JSON.parse(decodedJsonObject);
   }
 
-    //Websockets End
+  //Websockets End
 }
 
 module.exports = Firstock;
