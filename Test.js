@@ -12,6 +12,8 @@ const userDetails = {
   apiKey: "",
 };
 
+// Login and user Details start 
+
 firstock.login(
   {
     userId: userDetails.userId,
@@ -30,6 +32,10 @@ firstock.getUserDetails((err, result) => {
   console.log("getUserDetails Error, ", err);
   console.log("getUserDetails Result: ", result);
 });
+
+// Login and user Details end
+
+// Order and report start
 
 firstock.placeOrder(
   {
@@ -70,6 +76,7 @@ const modifyOrder = (orderNumber) => {
     }
   );
 };
+
 const singleOrderHistory = (orderNumber) => {
   firstock.singleOrderHistory({ orderNumber: orderNumber }, (err, result) => {
     console.log("Error, ", err);
@@ -77,6 +84,7 @@ const singleOrderHistory = (orderNumber) => {
     cancelOrder(orderNumber);
   });
 };
+
 const cancelOrder = (orderNumber) => {
   firstock.cancelOrder({ orderNumber: orderNumber }, (err, result) => {
     console.log("Error, ", err);
@@ -105,8 +113,6 @@ firstock.orderBook((err, result) => {
   console.log("orderBook Result: ", result);
 });
 
-// ################################################################################################################################################################
-
 firstock.tradeBook((err, result) => {
   console.log("tradeBook Error, ", err);
   console.log("tradeBook Result: ", result);
@@ -134,7 +140,7 @@ firstock.productConversion(
 );
 
 firstock.holdings({ product: "C" }, (err, result) => {
-  console.log("Error, ", err);
+  console.log("holdings Error, ", err);
   console.log("holdings Result: ", result);
 });
 
@@ -142,6 +148,40 @@ firstock.limits((err, result) => {
   console.log("Error, ", err);
   console.log("limits Result: ", result);
 });
+
+firstock.basketMargin(
+  {
+    basket: [
+      {
+        exchange: "NSE",
+        tradingSymbol: "NESTLEIND-EQ",
+        quantity: "1",
+        transactionType: "S",
+        price: "1200",
+        product: "I",
+        priceType: "LMT",
+      },
+      {
+        exchange: "NSE",
+        tradingSymbol: "NESTLEIND-EQ",
+        quantity: "1",
+        transactionType: "S",
+        price: "1300",
+        product: "I",
+        priceType: "LMT",
+      },
+    ],
+  },
+  (err, result) => {
+    console.log("basketMargin Error, ", err);
+    console.log("basketMargin Result: ", result);
+  }
+);
+
+// Order and report end
+
+
+// Market Connect start
 
 firstock.getQuotes(
   {
@@ -171,7 +211,7 @@ firstock.getSecurityInfo(
 );
 
 firstock.getIndexList({ exchange: "NSE" }, (err, result) => {
-  console.log(" getIndexList Error, ", err);
+  console.log("getIndexList Error, ", err);
   console.log("getIndexList Result: ", result);
 });
 
@@ -220,35 +260,6 @@ firstock.timePriceSeries(
   }
 );
 
-firstock.basketMargin(
-  {
-    basket: [
-      {
-        exchange: "NSE",
-        tradingSymbol: "NESTLEIND-EQ",
-        quantity: "1",
-        transactionType: "S",
-        price: "1200",
-        product: "I",
-        priceType: "LMT",
-      },
-      {
-        exchange: "NSE",
-        tradingSymbol: "NESTLEIND-EQ",
-        quantity: "1",
-        transactionType: "S",
-        price: "1300",
-        product: "I",
-        priceType: "LMT",
-      },
-    ],
-  },
-  (err, result) => {
-    console.log("basketMargin Error, ", err);
-    console.log("basketMargin Result: ", result);
-  }
-);
-
 firstock.optionGreek(
   {
     expiryDate: "02-MAR-2023",
@@ -263,6 +274,10 @@ firstock.optionGreek(
     console.log("optionGreek Result: ", result);
   }
 );
+
+// Market Connect end
+
+// Strategies start
 
 firstock.multiPlaceOrder(
   {
@@ -324,7 +339,7 @@ firstock.longStrangle(
     symbol: "NIFTY",
     callStrikePrice: "18000",
     putStrikePrice: "17000",
-    expiry: "23FEB23",
+    expiry: "02MAR23",
     product: "I",
     quantity: "1",
     remarks: "longStrangle",
@@ -384,6 +399,8 @@ firstock.shortStrangle(
     console.log("shortStrangle Result: ", result);
   }
 );
+
+// Strategies end
 
 // firstock.logout((err, result)=>{
 //     console.log("Error, ",err)
