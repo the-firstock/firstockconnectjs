@@ -25,7 +25,7 @@ const Firstock = require('thefirstock');
 
 const firstock = new Firstock();
 
-""" Login using firstock account"""
+// Login using firstock account//
 firstock.login({
     "userId": "",
     "password": "",
@@ -38,7 +38,7 @@ firstock.login({
 })
 
 
-"""Place an order"""
+//Place an order//
 firstock.placeOrder(
   {
     exchange: "",
@@ -58,27 +58,27 @@ firstock.placeOrder(
   }
 );
 
-"""Fetch single order deatils"""
+//Fetch single order deatils//
 firstock.singleOrderHistory({ orderNumber: "" }, (err, result) => {
   console.log("Error, ", err);
   console.log("Result: ", result);
 });
 
 
-"""Order book"""
+//Order book//
 firstock.orderBook((err, result) => {
   console.log("Error, ", err);
   console.log("Result: ", result);
 });
 
-"""Cancel order"""
+//Cancel order//
 firstock.cancelOrder({ orderNumber: "" }, (err, result) => {
   console.log("Error, ", err);
   console.log("Result: ", result);
 });
 
 
-"""Historical data""" 
+//Historical data// 
 firstock.timePriceSeries(
   {
     exchange: "",
@@ -97,7 +97,7 @@ Refer to the [Firstock Connect Documentation](https://connect.thefirstock.com/) 
 
 ## WebSocket usage 
 ```javascript
-"""Initializer"""
+//Initializer//
 const ws = firstock.initializeWebSocket();
 
 ws.on("open", function open() {
@@ -114,12 +114,12 @@ ws.on("error", function error(error) {
 
 ws.on("message", function message(data) {
   const result = firstock.receiveWebSocketDetails(data);
-    """Prints the message successfully"""
+    //Prints the message successfully//
   console.log("Result: ", result);
    
-    """Establishment of connection for required symbol"""
-  ws.send(firstock.subscribeFeed("NSE|26000")); // Subscribe to NIFTY
-  ws.send(firstock.subscribeFeed("NSE|26009")); // Subscribe to BANKNIFTY
+    //Establishment of connection for required symbol//
+  ws.send(firstock.subscribeFeedAcknowledgement("NSE|26000")); // Subscribe to NIFTY
+  ws.send(firstock.subscribeFeedAcknowledgement("NSE|26009")); // Subscribe to BANKNIFTY
 });
 ```
 
