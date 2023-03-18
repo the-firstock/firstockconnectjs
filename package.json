@@ -1,6 +1,6 @@
 {
   "name": "thefirstock",
-  "version": "2.0.7",
+  "version": "3.0.0",
   "description": "Node js package for using firstock apis",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/technologythefirstock/thefirstock_nodejs.git"
+    "url": "git+https://github.com/the-firstock/firstockconnectjs.git"
   },
   "keywords": [
     "firstock"
@@ -16,9 +16,9 @@
   "author": "firstock",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/technologythefirstock/thefirstock_nodejs/issues"
+    "url": "https://github.com/the-firstock/firstockconnectjs/issues"
   },
-  "homepage": "https://github.com/technologythefirstock/thefirstock_nodejs#readme",
+  "homepage": "https://github.com/the-firstock/firstockconnectjs#readme",
   "dependencies": {
     "axios": "^0.27.2",
     "ws": "^8.8.0"
