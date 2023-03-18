@@ -12,29 +12,29 @@ const userDetails = {
   apiKey: "",
 };
 
-// firstock.login(
-//   {
-//     userId: userDetails.userId,
-//     password: userDetails.password,
-//     TOTP: userDetails.TOTP,
-//     vendorCode: userDetails.vendorCode,
-//     apiKey: userDetails.apiKey,
-//   },
-//   (err, result) => {
-//     console.log("Error, ", err);
-//     console.log("Result: ", result);
-//   }
-// );
+firstock.login(
+  {
+    userId: userDetails.userId,
+    password: userDetails.password,
+    TOTP: userDetails.TOTP,
+    vendorCode: userDetails.vendorCode,
+    apiKey: userDetails.apiKey,
+  },
+  (err, result) => {
+    console.log("Error, ", err);
+    console.log("Result: ", result);
+  }
+);
 
 // firstock.logout((err, result)=>{
 //     console.log("Error, ",err)
 //     console.log("Result: ",result)
 // })
 
-firstock.getUserDetails((err, result) => {
-  console.log("getUserDetails Error, ", err);
-  console.log("getUserDetails Result: ", result);
-});
+// firstock.getUserDetails((err, result) => {
+//   console.log("getUserDetails Error, ", err);
+//   console.log("getUserDetails Result: ", result);
+// });
 
 // firstock.placeOrder(
 //   {
@@ -181,6 +181,47 @@ firstock.getUserDetails((err, result) => {
 //     console.log("getQuotes Result: ", result);
 //   }
 // );
+
+// firstock.getMultiQuotes(
+//  { data: [
+//     { exchange: 'NSE', token: '26000' },
+//     { exchange: 'NSE', token: '26009' },
+//     { exchange: 'NFO', token: '55101' },
+//     { exchange: 'NFO', token: '55098' },
+//     { exchange: 'NFO', token: '55095' },
+//     { exchange: 'NFO', token: '55097' },
+//     { exchange: 'NFO', token: '55099' },
+//     { exchange: 'NFO', token: '55102' },
+//     { exchange: 'NFO', token: '55096' },
+//   ]
+// },
+//   (err, result) => {
+//     console.log("getMultiQuotes Error, ", err);
+//     console.log("getMultiQuotes Result: ", result);
+//   }
+// );
+
+// firstock.getQuoteltp(
+//   {
+//     exchange: "NSE",
+//     token: "26000",
+//   },
+//   (err, result) => {
+//     console.log("getQuoteltp Error, ", err);
+//     console.log("getQuoteltp Result: ", result);
+//   }
+// );
+
+firstock.getMultiQuotesltp(
+ { data: [
+    { exchange: 'NSE', token: '26000' }
+  ]
+},
+  (err, result) => {
+    console.log("getMultiQuotesltp Error, ", err);
+    console.log("getMultiQuotesltp Result: ", result);
+  }
+);
 
 // firstock.searchScripts({ stext: "ITC" }, (err, result) => {
 //   console.log("searchScripts Error, ", err);
@@ -404,23 +445,23 @@ firstock.getUserDetails((err, result) => {
 //   }
 // );
 
-firstock.shortStrangle(
-  {
-    symbol: "NIFTY",
-    callStrikePrice: "17500",
-    putStrikePrice: "17000",
-    expiry: "02MAR23",
-    product: "I",
-    quantity: "1",
-    remarks: "ShortStrangleWithOutHedge",
-    hedge: false,
-    hedgeValue: 300,
-  },
-  (err, result) => {
-    console.log("shortStrangle Error, ", err);
-    console.log("shortStrangle Result: ", result);
-  }
-);
+// firstock.shortStrangle(
+//   {
+//     symbol: "NIFTY",
+//     callStrikePrice: "17500",
+//     putStrikePrice: "17000",
+//     expiry: "02MAR23",
+//     product: "I",
+//     quantity: "1",
+//     remarks: "ShortStrangleWithOutHedge",
+//     hedge: false,
+//     hedgeValue: 300,
+//   },
+//   (err, result) => {
+//     console.log("shortStrangle Error, ", err);
+//     console.log("shortStrangle Result: ", result);
+//   }
+// );
 
 // const ws = firstock.initializeWebSocket();
 
