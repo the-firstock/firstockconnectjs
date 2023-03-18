@@ -485,6 +485,92 @@ class Firstock extends AFirstock {
       }
     });
   }
+// ######################################################################################################################################
+
+ getMultiQuotes({ data }, callBack) {
+    Commonfunctions.readData((err, readData) => {
+      if (err) {
+        callBack(err, null);
+      } else {
+        const userId = readData.userId || this.userId;
+        const jKey = readData.token || this.token;
+  
+        axiosInterceptor.post(`getMultiQuotes`, {
+          userId,
+          jKey,
+          data,
+        })
+        .then(response => {  
+          callBack(null, response.data);
+        })
+        .catch(error => {
+          callBack(error.response.data, null);
+        });
+      }
+    });
+  } 
+
+
+
+  getQuoteltp({ exchange, token },callBack) {
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(err, null);
+      } else {
+        const userId = data.userId || this.userId;
+        const jKey = data.token || this.token;
+        axiosInterceptor
+          .post(`getQuote/ltp`, {
+            userId,
+            jKey,
+            exchange,
+            token
+          })
+          .then((response) => {
+            const { data } = response;
+
+            callBack(null, data);
+          })
+          .catch((error) => {
+            callBack(error.response.data, null);
+          });
+      }
+    });
+  }
+
+
+ 
+  
+
+  getMultiQuotesltp({ data }, callBack) {
+    Commonfunctions.readData((err, readData) => {
+      if (err) {
+        callBack(err, null);
+      } else {
+        const userId = readData.userId || this.userId;
+        const jKey = readData.token || this.token;
+        axiosInterceptor
+          .post(`getMultiQuotes/ltp`, {
+            userId,
+            jKey,
+            data,
+          })
+          .then((response) => {
+            callBack(null, response.data);
+          })
+          .catch((error) => {
+            callBack(error.response.data, null);
+          });
+      }
+    });
+  }
+
+
+
+  // ######################################################################################################################################
+
+
+
   searchScripts({ stext }, callBack) {
     Commonfunctions.readData((err, data) => {
       if (err) {
@@ -957,6 +1043,11 @@ class Firstock extends AFirstock {
     });
   }
 
+
+
+
+
+
   //Websockets Start
   initializeWebSocket() {
     const ws = new WebSocket(CONSTANT.WSS_LINK);
@@ -1052,6 +1143,15 @@ class Firstock extends AFirstock {
   }
 
   //Websockets End
+
+
+
+
+
+
 }
+
+
+
 
 module.exports = Firstock;
