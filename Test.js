@@ -12,6 +12,7 @@ const userDetails = {
   apiKey: "",
 };
 
+
 // // Login and user Details start
 
 // firstock.login(
@@ -192,6 +193,47 @@ const userDetails = {
 //     console.log("getQuotes Result: ", result);
 //   }
 // );
+
+// firstock.getMultiQuotes(
+//  { data: [
+//     { exchange: 'NSE', token: '26000' },
+//     { exchange: 'NSE', token: '26009' },
+//     { exchange: 'NFO', token: '55101' },
+//     { exchange: 'NFO', token: '55098' },
+//     { exchange: 'NFO', token: '55095' },
+//     { exchange: 'NFO', token: '55097' },
+//     { exchange: 'NFO', token: '55099' },
+//     { exchange: 'NFO', token: '55102' },
+//     { exchange: 'NFO', token: '55096' },
+//   ]
+// },
+//   (err, result) => {
+//     console.log("getMultiQuotes Error, ", err);
+//     console.log("getMultiQuotes Result: ", result);
+//   }
+// );
+
+// firstock.getQuoteltp(
+//   {
+//     exchange: "NSE",
+//     token: "26000",
+//   },
+//   (err, result) => {
+//     console.log("getQuoteltp Error, ", err);
+//     console.log("getQuoteltp Result: ", result);
+//   }
+// );
+
+firstock.getMultiQuotesltp(
+ { data: [
+    { exchange: 'NSE', token: '26000' }
+  ]
+},
+  (err, result) => {
+    console.log("getMultiQuotesltp Error, ", err);
+    console.log("getMultiQuotesltp Result: ", result);
+  }
+);
 
 // firstock.searchScripts({ stext: "ITC" }, (err, result) => {
 //   console.log("searchScripts Error, ", err);
@@ -399,12 +441,14 @@ const userDetails = {
 //   }
 // );
 
+
 // // Strategies end
 
 // firstock.logout((err, result)=>{
 //     console.log("Error, ",err)
 //     console.log("Result: ",result)
 // })
+
 
 // //Initializer//
 // const ws = firstock.initializeWebSocket();
