@@ -65,6 +65,21 @@ class AFirstock {
   getQuotes(){
 
   }
+// #######################################
+  getQuoteltp(){
+
+  }
+
+  getMultiQuotesltp(){
+
+  }
+
+  getMultiQuotes(){
+
+  }
+
+  
+
   searchScripts(){
 
   }
