@@ -12,7 +12,6 @@ const userDetails = {
   apiKey: "",
 };
 
-
 // // Login and user Details start
 
 // firstock.login(
@@ -224,16 +223,13 @@ const userDetails = {
 //   }
 // );
 
-firstock.getMultiQuotesltp(
- { data: [
-    { exchange: 'NSE', token: '26000' }
-  ]
-},
-  (err, result) => {
-    console.log("getMultiQuotesltp Error, ", err);
-    console.log("getMultiQuotesltp Result: ", result);
-  }
-);
+// firstock.getMultiQuotesltp(
+//   { data: [{ exchange: "NSE", token: "26000" }] },
+//   (err, result) => {
+//     console.log("getMultiQuotesltp Error, ", err);
+//     console.log("getMultiQuotesltp Result: ", result);
+//   }
+// );
 
 // firstock.searchScripts({ stext: "ITC" }, (err, result) => {
 //   console.log("searchScripts Error, ", err);
@@ -441,7 +437,6 @@ firstock.getMultiQuotesltp(
 //   }
 // );
 
-
 // // Strategies end
 
 // firstock.logout((err, result)=>{
@@ -449,22 +444,23 @@ firstock.getMultiQuotesltp(
 //     console.log("Result: ",result)
 // })
 
-
-// //Initializer//
+// // //Initializer//
 // const ws = firstock.initializeWebSocket();
 
 // ws.on("open", function open() {
 //   firstock.getWebSocketDetails((err, result) => {
 //     if (!err) {
+//       console.log("resilt",result)
 //       ws.send(result);
 //     }
 //   });
 // });
 
+
+
 // ws.on("error", function error(error) {
 //   console.log(`WebSocket error: ${error}`);
 // });
-
 
 // ws.on("message", function message(data) {
 //   const result = firstock.receiveWebSocketDetails(data);
@@ -472,17 +468,18 @@ firstock.getMultiQuotesltp(
 
 //   //Subscribe Feed
 //   // ws.send(firstock.subscribeFeed("NSE|22"))
-//   // ws.send(firstock.subscribeFeedAcknowledgement("NSE|22"))
+//   // ws.send(firstock.subscribeFeedAcknowledgement("NSE|26000#NSE|26009"))
 //   // ws.send(firstock.unsubscribeFeed("NSE|26000#NSE|26009#NSE|26017"))
 
 //   //Subscribe Depth
 //   //ws.send(firstock.subscribeDepth("NSE|26000"))
 //   //ws.send(firstock.subscribeDepthAcknowledgement("NSE|26000"))
 
-//    //Subscribe order
+//   //Subscribe order
 //   //ws.send(firstock.subscribeOrderUpdate("TV0001"))
 //   //ws.send(firstock.subscribeOrderAcknowledgement());
-
 // });
+
+// // ws.send(firstock.subscribeFeedAcknowledgement("NSE|26000#NSE|26009"));
 
 // module.exports = Firstock;
