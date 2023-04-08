@@ -1,26 +1,28 @@
-# The Firstock Connect API Nodejs client - v3  
-
+# The Firstock Connect API Nodejs client - v3
 
 To communicate with the Firstock Connect API using Nodejs, you can use the official Nodejs client library provided by Firstock.
-<br /> Licensed under the MIT License.
+`<br />` Licensed under the MIT License.
 
-[Version - 3.0.1](https://www.npmjs.com/package/thefirstock)
+[Version - 3.0.](https://www.npmjs.com/package/thefirstock)2
 
-## Documentation 
+## Documentation
+
 * Nodejs client documentation
 
-## v3 - Changes 
+## v3 - Changes
+
 * Error code response structured has been changed
 * Renamed
 
-## Installing the client 
+## Installing the client
+
 Use the package manager [npm](https://www.npmjs.com/) to install thefirstock.
 
 ```bash
 npm install thefirstock
 ```
 
-## API usage 
+## API usage
 
 ```javascript
 const Firstock = require('thefirstock');
@@ -95,9 +97,11 @@ firstock.timePriceSeries(
   }
 );
 ```
+
 Refer to the [Firstock Connect Documentation](https://connect.thefirstock.com/)  for the complete list of supported methods.
 
-## WebSocket usage 
+## WebSocket usage
+
 ```javascript
 //Initializer//
 const ws = firstock.initializeWebSocket();
@@ -125,14 +129,6 @@ ws.on("message", function message(data) {
 });
 ```
 
-
-
 ## Changelog
+
 Check release notes.
-
-
-
-
-
-
-
