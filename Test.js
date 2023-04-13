@@ -483,3 +483,8 @@ const userDetails = {
 // // ws.send(firstock.subscribeFeedAcknowledgement("NSE|26000#NSE|26009"));
 
 // module.exports = Firstock;
+
+
+// multiWebsocket starts
+
+

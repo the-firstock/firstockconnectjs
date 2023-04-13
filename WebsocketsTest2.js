@@ -25,7 +25,7 @@ const userDetails = {
 // );
 
 // // //Initializer//
-const ws = firstock.initializeWebSocket(1);
+const ws = firstock.initializeWebSocket(2);
 
 ws.on("open", function open() {
   firstock.getWebSocketDetails((err, result) => {
