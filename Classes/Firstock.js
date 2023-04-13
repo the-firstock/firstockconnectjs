@@ -362,7 +362,7 @@ class Firstock extends AFirstock {
             callBack(null, data);
           })
           .catch((error) => {
-            callBack(error.response.data, null);
+            callBack(error, null);
           });
       }
     });
