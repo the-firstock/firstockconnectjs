@@ -3,7 +3,9 @@
 To communicate with the Firstock Connect API using Nodejs, you can use the official Nodejs client library provided by Firstock.
 `<br />` Licensed under the MIT License.
 
+
 [Version - 3.1.0](https://www.npmjs.com/package/thefirstock)
+
 
 ## Documentation
 
@@ -101,6 +103,7 @@ firstock.timePriceSeries(
 Refer to the [Firstock Connect Documentation](https://connect.thefirstock.com/)  for the complete list of supported methods.
 
 ## WebSocket usage
+
 
 ```js
 //Initializer//
