@@ -3,11 +3,11 @@ const Firstock = require("./Classes/Firstock");
 const firstock = new Firstock();
 
 const userDetails = {
-    userId: "CM2096",
-    password: "Trade@13",
-    TOTP: "1996",
-    vendorCode: "CM2096_API",
-    apiKey: "b7e9f4d9b9588a12c574ae709fb8c47d",
+    userId: "",
+    password: "",
+    TOTP: "",
+    vendorCode: "",
+    apiKey: "",
 };
 
 // firstock.login(
