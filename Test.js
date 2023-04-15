@@ -72,7 +72,7 @@ firstock.login(
 //     (err, result) => {
 //       console.log("modifyOrder Error, ", err);
 //       console.log("modifyOrder Result: ", result);
-//       singleOrderHistory(orderNumber+1);
+//       singleOrderHistory(orderNumber);
 //     }
 //   );
 // };
