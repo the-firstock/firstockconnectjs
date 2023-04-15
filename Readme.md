@@ -102,14 +102,17 @@ Refer to the [Firstock Connect Documentation](https://connect.thefirstock.com/) 
 
 ## WebSocket usage
 
-```javascript
+```js
 //Initializer//
-const ws = firstock.initializeWebSocket();
+const ws = firstock.initializeWebSocket(1); // Sending Number = 1 or 2 for using two websockets simultaneoulsy
 
 ws.on("open", function open() {
   firstock.getWebSocketDetails((err, result) => {
     if (!err) {
-      ws.send(result);
+      firstock.initialSendWebSocketDetails(ws, result, () => {
+        //Subscribe Feed
+        ws.send(firstock.subscribeFeedAcknowledgement("NSE|26000")); //Sending NIFTY 50 Token
+      });
     }
   });
 });
@@ -120,12 +123,10 @@ ws.on("error", function error(error) {
 
 ws.on("message", function message(data) {
   const result = firstock.receiveWebSocketDetails(data);
-    //Prints the message successfully//
-  console.log("Result: ", result);
-   
-    //Establishment of connection for required symbol//
-  ws.send(firstock.subscribeFeedAcknowledgement("NSE|26000")); // Subscribe to NIFTY
-  ws.send(firstock.subscribeFeedAcknowledgement("NSE|26009")); // Subscribe to BANKNIFTY
+  console.log("message: ", result);
+  if (result["t"] === "tk" && result["ts"] === "Nifty 50") {
+    ws.send(firstock.subscribeFeedAcknowledgement("NSE|26009#NSE|26017")); //Sending BANKNIFTY and INDIAVIX Token
+  }
 });
 ```
 
