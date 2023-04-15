@@ -35,7 +35,7 @@ const firstock = new Firstock();
 firstock.login({
     "userId": "",
     "password": "",
-    "TOTP":""
+    "TOTP":"",
     "DOBnPAN": "",
     "vendorCode": "",
     "apiKey": ""
