@@ -485,34 +485,33 @@ class Firstock extends AFirstock {
       }
     });
   }
-// ######################################################################################################################################
+  // ######################################################################################################################################
 
- getMultiQuotes({ data }, callBack) {
+  getMultiQuotes({ data }, callBack) {
     Commonfunctions.readData((err, readData) => {
       if (err) {
         callBack(err, null);
       } else {
         const userId = readData.userId || this.userId;
         const jKey = readData.token || this.token;
-  
-        axiosInterceptor.post(`getMultiQuotes`, {
-          userId,
-          jKey,
-          data,
-        })
-        .then(response => {  
-          callBack(null, response.data);
-        })
-        .catch(error => {
-          callBack(error.response.data, null);
-        });
+
+        axiosInterceptor
+          .post(`getMultiQuotes`, {
+            userId,
+            jKey,
+            data,
+          })
+          .then((response) => {
+            callBack(null, response.data);
+          })
+          .catch((error) => {
+            callBack(error.response.data, null);
+          });
       }
     });
-  } 
+  }
 
-
-
-  getQuoteltp({ exchange, token },callBack) {
+  getQuoteltp({ exchange, token }, callBack) {
     Commonfunctions.readData((err, data) => {
       if (err) {
         callBack(err, null);
@@ -524,7 +523,7 @@ class Firstock extends AFirstock {
             userId,
             jKey,
             exchange,
-            token
+            token,
           })
           .then((response) => {
             const { data } = response;
@@ -537,10 +536,6 @@ class Firstock extends AFirstock {
       }
     });
   }
-
-
- 
-  
 
   getMultiQuotesltp({ data }, callBack) {
     Commonfunctions.readData((err, readData) => {
@@ -565,11 +560,7 @@ class Firstock extends AFirstock {
     });
   }
 
-
-
   // ######################################################################################################################################
-
-
 
   searchScripts({ stext }, callBack) {
     Commonfunctions.readData((err, data) => {
@@ -1043,15 +1034,18 @@ class Firstock extends AFirstock {
     });
   }
 
-
-
-
-
-
   //Websockets Start
-  initializeWebSocket() {
-    const ws = new WebSocket(CONSTANT.WSS_LINK);
-    return ws;
+  initializeWebSocket(number = 1) {
+    if (number === 1) {
+      const ws = new WebSocket(CONSTANT.WSS_LINK1);
+      return ws;
+    }
+    if (number === 2) {
+      const ws = new WebSocket(CONSTANT.WSS_LINK2);
+      return ws;
+    } else {
+      throw "Websocket 1 and 2 are allowed";
+    }
   }
   getWebSocketDetails(callBack) {
     Commonfunctions.readData((err, data) => {
@@ -1075,6 +1069,16 @@ class Firstock extends AFirstock {
       actid,
     };
     return JSON.stringify(messageData);
+  }
+  initialSendWebSocketDetails(ws, result, callback) {
+    ws.send(result);
+    let that = this;
+    ws.on("message", function message(data) {
+      const result = that.receiveWebSocketDetails(data);
+      if (result["s"] === "OK") {
+        callback();
+      }
+    });
   }
   subscribeFeed(k) {
     const messageData = {
@@ -1143,15 +1147,6 @@ class Firstock extends AFirstock {
   }
 
   //Websockets End
-
-
-
-
-
-
 }
-
-
-
 
 module.exports = Firstock;
