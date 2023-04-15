@@ -1034,9 +1034,17 @@ class Firstock extends AFirstock {
   }
 
   //Websockets Start
-  initializeWebSocket() {
-    const ws = new WebSocket(CONSTANT.WSS_LINK);
-    return ws;
+  initializeWebSocket(number = 1) {
+    if (number === 1) {
+      const ws = new WebSocket(CONSTANT.WSS_LINK1);
+      return ws;
+    }
+    if (number === 2) {
+      const ws = new WebSocket(CONSTANT.WSS_LINK2);
+      return ws;
+    } else {
+      throw "Websocket 1 and 2 are allowed";
+    }
   }
   getWebSocketDetails(callBack) {
     Commonfunctions.readData((err, data) => {
