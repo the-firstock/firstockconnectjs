@@ -1,6 +1,6 @@
 {
   "name": "thefirstock",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Node js package for using firstock apis",
   "main": "index.js",
   "scripts": {

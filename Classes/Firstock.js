@@ -1,3 +1,4 @@
+"use strict";
 const axios = require("axios");
 const Validations = require("../Validations/Validations");
 const WebSocket = require("ws");
@@ -1060,6 +1061,14 @@ class Firstock extends AFirstock {
       };
       callBack(null, JSON.stringify(params));
     });
+  }
+  sendWebSocketDetails({ t, k, actid = "" }) {
+    const messageData = {
+      t,
+      k,
+      actid,
+    };
+    return JSON.stringify(messageData);
   }
   initialSendWebSocketDetails(ws, result, callback) {
     ws.send(result);
