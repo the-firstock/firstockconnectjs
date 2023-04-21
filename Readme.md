@@ -4,7 +4,7 @@ To communicate with the Firstock Connect API using Nodejs, you can use the offic
 `<br />` Licensed under the MIT License.
 
 
-[Version - 3.1.0](https://www.npmjs.com/package/thefirstock)
+[Version - 3.1.1](https://www.npmjs.com/package/thefirstock)
 
 
 ## Documentation
