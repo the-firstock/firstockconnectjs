@@ -1,24 +1,25 @@
 const fs = require("fs");
 
 const saveData = (data, file, callback) => {
-  const path = "../config.json";
+  const path = "./config.json";
   const jsonData = JSON.stringify(data, null, 2);
   fs.writeFile(path, jsonData, callback);
 };
 
 const readData = (callback) => {
-  const path = "../config.json";
+  const path = "./config.json";
   fs.readFile(path, "utf-8", (err, jsonString) => {
     if (err) {
       callback(err, null);
     } else {
       try {
         const data = JSON.parse(jsonString);
-        if (checkifUserLoggedIn(data)) {
-          callback(null, data);
-        } else {
-          callback("Please login to Firstock", null);
-        }
+        callback(null, data);
+        // if (checkifUserLoggedIn(data)) {
+        //   callback(null, data);
+        // } else {
+        //   callback("Please login to Firstock", null);
+        // }
       } catch (error) {
         callback(error, null);
       }
@@ -26,12 +27,21 @@ const readData = (callback) => {
   });
 };
 
-const checkifUserLoggedIn = ({ userId, token }) => {
-  if (!userId || !token) {
-    return false;
+const checkifUserLoggedIn = ({ userId, jsonData }, callback) => {
+  if (jsonData[userId]) {
+    const jKey = jsonData[userId].jKey;
+    callback(null, jKey);
+  } else {
+    callback("Please login to Firstock", null);
   }
+};
 
-  return true;
+const jsonErrorMessage = {
+  "Unexpected end of JSON input": "Please login to Firstock",
+};
+
+const errorMessageMapping = (jsonData) => {
+  return jsonErrorMessage[jsonData.message] ?? jsonData.message;
 };
 
 const validateBasketMarginObject = (data) => {
@@ -71,4 +81,6 @@ module.exports = {
   validateBasketMarginObject,
   validateBasketMargin,
   handleError,
+  checkifUserLoggedIn,
+  errorMessageMapping
 };

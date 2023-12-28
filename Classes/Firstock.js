@@ -1,10 +1,12 @@
 "use strict";
 const axios = require("axios");
+const sha256 = require("sha256");
 const Validations = require("../Validations/Validations");
 const WebSocket = require("ws");
 const Commonfunctions = require("../shared/Commonfunctions");
 const CONSTANT = require("../shared/Constant");
-const { handleError } = Commonfunctions;
+const { handleError, checkifUserLoggedIn, errorMessageMapping } =
+  Commonfunctions;
 
 let axiosInterceptor = axios.create({
   baseURL: CONSTANT.API_LINK,
@@ -27,10 +29,13 @@ class Firstock extends AFirstock {
       vendorCode,
       apiKey,
     });
+
+    const encryptedPassword = sha256(password);
+
     axiosInterceptor
       .post(`login`, {
         userId,
-        password,
+        password: encryptedPassword,
         TOTP,
         vendorCode,
         apiKey,
@@ -38,7 +43,7 @@ class Firstock extends AFirstock {
       .then((response) => {
         const { data } = response;
         this.token = data.data.susertoken;
-        this.userId = data.actid;
+        this.userId = data.data.actid;
         const finished = (error) => {
           if (error) {
             callBack(error, null);
@@ -47,11 +52,24 @@ class Firstock extends AFirstock {
             callBack(null, data);
           }
         };
-        Commonfunctions.saveData(
-          { token: data.data.susertoken, userId: data.data.actid },
-          "config.json",
-          finished
-        );
+        Commonfunctions.readData((err, jsonData) => {
+          if (err) {
+            if (err.message === "Unexpected end of JSON input") {
+              let obj = {};
+              obj[data.data.actid] = {
+                jKey: data.data.susertoken,
+              };
+              Commonfunctions.saveData({ ...obj }, "config.json", finished);
+            } else {
+              callBack(err, null);
+            }
+          } else {
+            jsonData[data.data.actid] = {
+              jKey: data.data.susertoken,
+            };
+            Commonfunctions.saveData({ ...jsonData }, "config.json", finished);
+          }
+        });
       })
       .catch((error) => {
         callBack(handleError(error), null);
@@ -60,7 +78,7 @@ class Firstock extends AFirstock {
   logout(callBack) {
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
         const userId = data.userId || this.userId;
         const jKey = data.token || this.token;
@@ -93,26 +111,33 @@ class Firstock extends AFirstock {
       }
     });
   }
-  getUserDetails(callBack) {
+  getUserDetails({ userId }, callBack) {
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`userDetails`, {
-            userId,
-            jKey,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`userDetails`, {
+                userId,
+                jKey,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }

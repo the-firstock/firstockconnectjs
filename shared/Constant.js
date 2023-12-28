@@ -1,4 +1,4 @@
-const API_LINK = "https://connect.thefirstock.com/api/V3";
+const API_LINK = "https://connect.thefirstock.com/api/V4";
 const WSS_LINK1 = "wss://norenapi.thefirstock.com/NorenWSTP/";
 const WSS_LINK2 = "ws://norenapi.thefirstock.com:5810/NorenWSTP/";
 
