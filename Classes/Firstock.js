@@ -143,6 +143,7 @@ class Firstock extends AFirstock {
   }
   placeOrder(
     {
+      userId,
       exchange,
       tradingSymbol,
       quantity,
@@ -157,36 +158,42 @@ class Firstock extends AFirstock {
     callBack
   ) {
     Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`placeOrder`, {
-            userId,
-            actid: userId,
-            jKey,
-            exchange,
-            tradingSymbol,
-            quantity,
-            price,
-            product,
-            transactionType,
-            priceType,
-            retention,
-            remarks,
-            triggerPrice,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`placeOrder`, {
+                userId,
+                jKey,
+                exchange,
+                tradingSymbol,
+                quantity,
+                price,
+                product,
+                transactionType,
+                priceType,
+                retention,
+                remarks,
+                triggerPrice,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
