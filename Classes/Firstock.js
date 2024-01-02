@@ -141,6 +141,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   placeOrder(
     {
       userId,
@@ -199,6 +200,7 @@ class Firstock extends AFirstock {
   }
   orderMargin(
     {
+      userId,
       exchange,
       tradingSymbol,
       quantity,
@@ -209,85 +211,112 @@ class Firstock extends AFirstock {
     },
     callBack
   ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`orderMargin`, {
-            userId,
-            actid: userId,
-            jKey,
-            exchange,
-            tradingSymbol,
-            quantity,
-            price,
-            product,
-            transactionType,
-            priceType,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`orderMargin`, {
+                userId,
+                actid: userId,
+                jKey,
+                exchange,
+                tradingSymbol,
+                quantity,
+                price,
+                product,
+                transactionType,
+                priceType,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  orderBook(callBack) {
+
+  orderBook({ userId }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`orderBook`, {
-            userId,
-            jKey,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`orderBook`, {
+                userId,
+                jKey,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  cancelOrder({ orderNumber }, callBack) {
+  cancelOrder({ userId, orderNumber }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`cancelOrder`, {
-            userId,
-            jKey,
-            orderNumber,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+            axiosInterceptor
+              .post(`cancelOrder`, {
+                userId,
+                jKey,
+                orderNumber,
+              })
+              .then((response) => {
+                const { data } = response;
+
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
   modifyOrder(
     {
+      userId,
       orderNumber,
       price,
       quantity,
@@ -298,111 +327,145 @@ class Firstock extends AFirstock {
     },
     callBack
   ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
         callBack(err, null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`modifyOrder`, {
-            userId,
-            jKey,
-            quantity,
-            price,
-            triggerPrice,
-            orderNumber,
-            exchange,
-            tradingSymbol,
-            priceType,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`modifyOrder`, {
+                userId,
+                jKey,
+                quantity,
+                price,
+                triggerPrice,
+                orderNumber,
+                exchange,
+                tradingSymbol,
+                priceType,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  singleOrderHistory({ orderNumber }, callBack) {
+
+  singleOrderHistory({ userId, orderNumber }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`singleOrderHistory`, {
-            userId,
-            jKey,
-            orderNumber,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`singleOrderHistory`, {
+                userId,
+                jKey,
+                orderNumber,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  tradeBook(callBack) {
+  tradeBook({ userId }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
 
-        axiosInterceptor
-          .post(`tradeBook`, {
-            userId,
-            jKey,
-            actid: userId,
-          })
-          .then((response) => {
-            const { data } = response;
+            axiosInterceptor
+              .post(`tradeBook`, {
+                userId,
+                jKey,
+                actid: userId,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  positionsBook(callBack) {
+  positionsBook({ userId }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
 
-        axiosInterceptor
-          .post(`positionBook`, {
-            userId,
-            jKey,
-            actid: userId,
-          })
-          .then((response) => {
-            const { data } = response;
+            axiosInterceptor
+              .post(`positionBook`, {
+                userId,
+                jKey,
+                actid: userId,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(error, null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(error, null);
+              });
+          }
+        });
       }
     });
   }
   productConversion(
     {
+      userId,
       exchange,
       tradingSymbol,
       quantity,
@@ -413,83 +476,104 @@ class Firstock extends AFirstock {
     },
     callBack
   ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`productConversion`, {
-            userId,
-            jKey,
-            actid: userId,
-            exchange,
-            tradingSymbol,
-            quantity,
-            product,
-            transactionType,
-            positionType,
-            previousProduct,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`productConversion`, {
+                userId,
+                jKey,
+                exchange,
+                tradingSymbol,
+                quantity,
+                product,
+                transactionType,
+                positionType,
+                previousProduct,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  holdings({ product }, callBack) {
+  holdings({ userId }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
 
-        axiosInterceptor
-          .post(`holdings`, {
-            userId,
-            jKey,
-            actid: userId,
-            product,
-          })
-          .then((response) => {
-            const { data } = response;
+            axiosInterceptor
+              .post(`holdings`, {
+                userId,
+                jKey,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  limits(callBack) {
+  limits({ userId }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`limit`, {
-            userId,
-            jKey,
-            actid: userId,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`limit`, {
+                userId,
+                jKey,
+                actid: userId,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
@@ -747,30 +831,39 @@ class Firstock extends AFirstock {
       }
     });
   }
-  basketMargin({ basket }, callBack) {
+  basketMargin({ userId, basket }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, dat) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = dat.userId || this.userId;
-        const jKey = dat.token || this.token;
-        axiosInterceptor
-          .post(`basketMargin`, {
-            userId,
-            jKey,
-            basket,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = dat;
+            axiosInterceptor
+              .post(`basketMargin`, {
+                userId,
+                jKey,
+                basket,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
+
   optionGreek(
     { expiryDate, strikePrice, spotPrice, initRate, volatility, optionType },
     callBack
