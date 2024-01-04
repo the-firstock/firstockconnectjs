@@ -75,6 +75,7 @@ class Firstock extends AFirstock {
         callBack(handleError(error), null);
       });
   }
+
   logout(callBack) {
     Commonfunctions.readData((err, data) => {
       if (err) {
@@ -111,6 +112,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   getUserDetails({ userId }, callBack) {
     const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
@@ -198,6 +200,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   orderMargin(
     {
       userId,
@@ -281,6 +284,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   cancelOrder({ userId, orderNumber }, callBack) {
     Validations.validateplaceOrder();
     const currentUserId = userId;
@@ -314,6 +318,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   modifyOrder(
     {
       userId,
@@ -397,6 +402,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   tradeBook({ userId }, callBack) {
     Validations.validateplaceOrder();
     const currentUserId = userId;
@@ -430,6 +436,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   positionsBook({ userId }, callBack) {
     Validations.validateplaceOrder();
     const currentUserId = userId;
@@ -463,6 +470,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   productConversion(
     {
       userId,
@@ -513,6 +521,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   holdings({ userId }, callBack) {
     Validations.validateplaceOrder();
     const currentUserId = userId;
@@ -545,6 +554,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   limits({ userId }, callBack) {
     Validations.validateplaceOrder();
     const currentUserId = userId;
@@ -577,257 +587,346 @@ class Firstock extends AFirstock {
       }
     });
   }
-  getQuotes({ exchange, token }, callBack) {
+
+  getQuotes({ userId, exchange, tradingSymbol }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`getQuote`, {
-            userId,
-            jKey,
-            exchange,
-            token,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`getQuote`, {
+                userId,
+                jKey,
+                exchange,
+                tradingSymbol,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
-      }
-    });
-  }
-  // ######################################################################################################################################
-
-  getMultiQuotes({ data }, callBack) {
-    Commonfunctions.readData((err, readData) => {
-      if (err) {
-        callBack(err, null);
-      } else {
-        const userId = readData.userId || this.userId;
-        const jKey = readData.token || this.token;
-
-        axiosInterceptor
-          .post(`getMultiQuotes`, {
-            userId,
-            jKey,
-            data,
-          })
-          .then((response) => {
-            callBack(null, response.data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
 
-  getQuoteltp({ exchange, token }, callBack) {
+  getMultiQuotes({ userId, readData }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`getQuote/ltp`, {
-            userId,
-            jKey,
-            exchange,
-            token,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+            axiosInterceptor
+              .post(`getMultiQuotes`, {
+                userId,
+                jKey,
+                data: readData,
+              })
+              .then((response) => {
+                callBack(null, response.data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
 
-  getMultiQuotesltp({ data }, callBack) {
-    Commonfunctions.readData((err, readData) => {
-      if (err) {
-        callBack(err, null);
-      } else {
-        const userId = readData.userId || this.userId;
-        const jKey = readData.token || this.token;
-        axiosInterceptor
-          .post(`getMultiQuotes/ltp`, {
-            userId,
-            jKey,
-            data,
-          })
-          .then((response) => {
-            callBack(null, response.data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
-      }
-    });
-  }
-
-  // ######################################################################################################################################
-
-  searchScripts({ stext }, callBack) {
+  getQuoteltp({ userId, exchange, tradingSymbol }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`searchScrips`, {
-            userId,
-            jKey,
-            stext,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`getQuote/ltp`, {
+                userId,
+                jKey,
+                exchange,
+                tradingSymbol,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  getSecurityInfo({ exchange, token }, callBack) {
+
+  getMultiQuotesltp({ userId, readData }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`securityInfo`, {
-            userId,
-            jKey,
-            exchange,
-            token,
-          })
-          .then((response) => {
-            const { data } = response;
-
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`getMultiQuotes/ltp`, {
+                userId,
+                jKey,
+                data: readData,
+              })
+              .then((response) => {
+                callBack(null, response.data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  getIndexList({ exchange }, callBack) {
+
+  searchScrips({ userId, stext }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`indexList`, {
-            userId,
-            jKey,
-            exchange,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`searchScrips`, {
+                userId,
+                jKey,
+                stext,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  getOptionChain({ exchange, tradingSymbol, strikePrice, count }, callBack) {
+
+  getSecurityInfo({ userId, exchange, tradingSymbol }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`optionChain`, {
-            userId,
-            jKey,
-            exchange,
-            tradingSymbol,
-            strikePrice,
-            count,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`securityInfo`, {
+                userId,
+                jKey,
+                exchange,
+                tradingSymbol,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  spanCalculator(listData, callBack) {
+
+  getIndexList({ userId, exchange }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`spanCalculators`, {
-            userId,
-            jKey,
-            data: listData,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`indexList`, {
+                userId,
+                jKey,
+                exchange,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  timePriceSeries({ exchange, token, endTime, startTime, interval }, callBack) {
+
+  getOptionChain(
+    { userId, exchange, tradingSymbol, strikePrice, count },
+    callBack
+  ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`timePriceSeries`, {
-            userId,
-            jKey,
-            exchange,
-            token,
-            endTime,
-            startTime,
-            interval,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`optionChain`, {
+                userId,
+                jKey,
+                exchange,
+                tradingSymbol,
+                strikePrice,
+                count,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
+      }
+    });
+  }
+
+  spanCalculator({ userId, readData }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(errorMessageMapping(err), null);
+      } else {
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`spanCalculators`, {
+                userId,
+                jKey,
+                data: readData,
+              })
+              .then((response) => {
+                const { data } = response;
+
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
+      }
+    });
+  }
+
+  timePriceSeries(
+    { userId, exchange, tradingSymbol, endTime, startTime, interval },
+    callBack
+  ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(errorMessageMapping(err), null);
+      } else {
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`timePriceSeries`, {
+                userId,
+                jKey,
+                exchange,
+                tradingSymbol,
+                endTime,
+                startTime,
+                interval,
+              })
+              .then((response) => {
+                const { data } = response;
+
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
@@ -896,32 +995,42 @@ class Firstock extends AFirstock {
       }
     });
   }
-  multiPlaceOrder({ data }, callBack) {
-    Commonfunctions.readData((err, datatemp) => {
-      if (err) {
-        callBack(err, null);
-      } else {
-        const userId = datatemp.userId || this.userId;
-        const jKey = datatemp.token || this.token;
-        axiosInterceptor
-          .post(`strategies/multiPlaceOrders`, {
-            userId,
-            jKey,
-            data,
-          })
-          .then((response) => {
-            const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+  multiPlaceOrder({ userId, readData }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(errorMessageMapping(err), null);
+      } else {
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`strategies/multiPlaceOrders`, {
+                userId,
+                jKey,
+                data: readData,
+              })
+              .then((response) => {
+                const { data } = response;
+
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
   bearPutSpread(
     {
+      userId,
       symbol,
       putBuyStrikePrice,
       putSellStrikePrice,
@@ -932,32 +1041,40 @@ class Firstock extends AFirstock {
     },
     callBack
   ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`strategies/bearPutSpread`, {
-            symbol,
-            putBuyStrikePrice,
-            putSellStrikePrice,
-            expiry,
-            product,
-            quantity,
-            remarks,
-            jKey,
-            userId: userId,
-          })
-          .then((response) => {
-            const { data } = response;
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`strategies/bearPutSpread`, {
+                symbol,
+                putBuyStrikePrice,
+                putSellStrikePrice,
+                expiry,
+                product,
+                quantity,
+                remarks,
+                jKey,
+                userId,
+              })
+              .then((response) => {
+                const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
