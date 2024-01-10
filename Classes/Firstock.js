@@ -930,6 +930,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   basketMargin({ userId, basket }, callBack) {
     Validations.validateplaceOrder();
     const currentUserId = userId;
@@ -1028,6 +1029,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   bearPutSpread(
     {
       userId,
@@ -1038,6 +1040,9 @@ class Firstock extends AFirstock {
       product,
       quantity,
       remarks,
+      exchange,
+      priceType,
+      retention,
     },
     callBack
   ) {
@@ -1064,6 +1069,67 @@ class Firstock extends AFirstock {
                 remarks,
                 jKey,
                 userId,
+                exchange,
+                priceType,
+                retention,
+              })
+              .then((response) => {
+                const { data } = response;
+
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+                console.log(error);
+              });
+          }
+        });
+      }
+    });
+  }
+
+  bullCallSpread(
+    {
+      userId,
+      symbol,
+      callBuyStrikePrice,
+      callSellStrikePrice,
+      expiry,
+      product,
+      quantity,
+      remarks,
+      retention,
+      priceType,
+      exchange,
+    },
+    callBack
+  ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(errorMessageMapping(err), null);
+      } else {
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`strategies/bullCallSpread`, {
+                symbol,
+                callBuyStrikePrice,
+                callSellStrikePrice,
+                expiry,
+                product,
+                exchange,
+                quantity,
+                remarks,
+                jKey,
+                userId: userId,
+                retention,
+                priceType,
               })
               .then((response) => {
                 const { data } = response;
@@ -1078,49 +1144,10 @@ class Firstock extends AFirstock {
       }
     });
   }
-  bullCallSpread(
-    {
-      symbol,
-      callBuyStrikePrice,
-      callSellStrikePrice,
-      expiry,
-      product,
-      quantity,
-      remarks,
-    },
-    callBack
-  ) {
-    Commonfunctions.readData((err, data) => {
-      if (err) {
-        callBack(err, null);
-      } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`strategies/bullCallSpread`, {
-            symbol,
-            callBuyStrikePrice,
-            callSellStrikePrice,
-            expiry,
-            product,
-            quantity,
-            remarks,
-            jKey,
-            userId: userId,
-          })
-          .then((response) => {
-            const { data } = response;
 
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
-      }
-    });
-  }
   longStrangle(
     {
+      userId,
       symbol,
       callStrikePrice,
       putStrikePrice,
@@ -1128,112 +1155,109 @@ class Firstock extends AFirstock {
       product,
       quantity,
       remarks,
+      retention,
+      priceType,
+      exchange,
     },
     callBack
   ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`strategies/longStrangle`, {
-            symbol,
-            callStrikePrice,
-            putStrikePrice,
-            expiry,
-            product,
-            quantity,
-            remarks,
-            jKey,
-            userId: userId,
-          })
-          .then((response) => {
-            const { data } = response;
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`strategies/longStrangle`, {
+                symbol,
+                callStrikePrice,
+                putStrikePrice,
+                expiry,
+                product,
+                quantity,
+                remarks,
+                jKey,
+                userId: userId,
+                retention,
+                priceType,
+                exchange,
+              })
+              .then((response) => {
+                const { data } = response;
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
+
   longStraddle(
-    { symbol, strikePrice, expiry, product, quantity, remarks },
-    callBack
-  ) {
-    Commonfunctions.readData((err, data) => {
-      if (err) {
-        callBack(err, null);
-      } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`strategies/longStraddle`, {
-            symbol,
-            strikePrice,
-            expiry,
-            product,
-            quantity,
-            remarks,
-            jKey,
-            userId: userId,
-          })
-          .then((response) => {
-            const { data } = response;
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
-      }
-    });
-  }
-  shortStraddle(
     {
+      userId,
       symbol,
       strikePrice,
       expiry,
       product,
       quantity,
       remarks,
-      hedge,
-      hedgeValue,
+      retention,
+      priceType,
+      exchange,
     },
     callBack
   ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`strategies/shortStraddle`, {
-            symbol,
-            strikePrice,
-            expiry,
-            product,
-            quantity,
-            remarks,
-            jKey,
-            userId: userId,
-            hedge,
-            hedgeValue,
-          })
-          .then((response) => {
-            const { data } = response;
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`strategies/longStraddle`, {
+                symbol,
+                strikePrice,
+                expiry,
+                product,
+                quantity,
+                remarks,
+                retention,
+                priceType,
+                exchange,
+                jKey,
+                userId,
+              })
+              .then((response) => {
+                const { data } = response;
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
-  shortStrangle(
+
+  shortStraddle(
     {
+      userId,
       symbol,
       callStrikePrice,
       putStrikePrice,
@@ -1243,36 +1267,115 @@ class Firstock extends AFirstock {
       remarks,
       hedge,
       hedgeValue,
+      exchange,
+      priceType,
+      retention,
+      strikePrice,
     },
     callBack
   ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
-        callBack(err, null);
+        callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`strategies/shortStrangle`, {
-            symbol,
-            callStrikePrice,
-            putStrikePrice,
-            expiry,
-            product,
-            quantity,
-            remarks,
-            jKey,
-            userId: userId,
-            hedge,
-            hedgeValue,
-          })
-          .then((response) => {
-            const { data } = response;
-            callBack(null, data);
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`strategies/shortStraddle`, {
+                userId,
+                symbol,
+                strikePrice,
+                callStrikePrice,
+                putStrikePrice,
+                expiry,
+                product,
+                quantity,
+                remarks,
+                hedge,
+                hedgeValue,
+                exchange,
+                priceType,
+                retention,
+                jKey,
+              })
+              .then((response) => {
+                const { data } = response;
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+                console.log(error);
+              });
+          }
+        });
+      }
+    });
+  }
+
+  shortStrangle(
+    {
+      userId,
+      symbol,
+      callStrikePrice,
+      putStrikePrice,
+      expiry,
+      product,
+      quantity,
+      remarks,
+      hedge,
+      hedgeValue,
+      exchange,
+      priceType,
+      retention,
+      strikePrice,
+    },
+    callBack
+  ) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(errorMessageMapping(err), null);
+      } else {
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`strategies/shortStrangle`, {
+                symbol,
+                callStrikePrice,
+                putStrikePrice,
+                expiry,
+                product,
+                quantity,
+                remarks,
+                jKey,
+                userId: userId,
+                hedge,
+                hedgeValue,
+                exchange,
+                priceType,
+                retention,
+                strikePrice,
+              })
+              .then((response) => {
+                const { data } = response;
+                callBack(null, data);
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
@@ -1290,6 +1393,7 @@ class Firstock extends AFirstock {
       throw "Websocket 1 and 2 are allowed";
     }
   }
+
   getWebSocketDetails(callBack) {
     Commonfunctions.readData((err, data) => {
       if (err) {
@@ -1305,6 +1409,7 @@ class Firstock extends AFirstock {
       callBack(null, JSON.stringify(params));
     });
   }
+
   sendWebSocketDetails({ t, k, actid = "" }) {
     const messageData = {
       t,
@@ -1313,6 +1418,7 @@ class Firstock extends AFirstock {
     };
     return JSON.stringify(messageData);
   }
+
   initialSendWebSocketDetails(ws, result, callback) {
     ws.send(result);
     let that = this;
@@ -1323,6 +1429,7 @@ class Firstock extends AFirstock {
       }
     });
   }
+
   subscribeFeed(k) {
     const messageData = {
       t: "tf",
@@ -1330,6 +1437,7 @@ class Firstock extends AFirstock {
     };
     return JSON.stringify(messageData);
   }
+
   subscribeFeedAcknowledgement(k) {
     const messageData = {
       t: "t",
@@ -1337,6 +1445,7 @@ class Firstock extends AFirstock {
     };
     return JSON.stringify(messageData);
   }
+
   unsubscribeFeed(k) {
     const messageData = {
       t: "u",
@@ -1344,6 +1453,7 @@ class Firstock extends AFirstock {
     };
     return JSON.stringify(messageData);
   }
+
   subscribeDepth(k) {
     const messageData = {
       t: "df",
