@@ -28,6 +28,7 @@ const readData = (callback) => {
 };
 
 const checkifUserLoggedIn = ({ userId, jsonData }, callback) => {
+  console.log(jsonData[userId]);
   if (jsonData[userId]) {
     const jKey = jsonData[userId].jKey;
     callback(null, jKey);
@@ -82,5 +83,5 @@ module.exports = {
   validateBasketMargin,
   handleError,
   checkifUserLoggedIn,
-  errorMessageMapping
+  errorMessageMapping,
 };

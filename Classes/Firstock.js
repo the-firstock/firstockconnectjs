@@ -5,6 +5,7 @@ const Validations = require("../Validations/Validations");
 const WebSocket = require("ws");
 const Commonfunctions = require("../shared/Commonfunctions");
 const CONSTANT = require("../shared/Constant");
+const jsonObj = require("../config.json");
 const { handleError, checkifUserLoggedIn, errorMessageMapping } =
   Commonfunctions;
 
@@ -76,39 +77,46 @@ class Firstock extends AFirstock {
       });
   }
 
-  logout(callBack) {
+  logout({ userId }, callBack) {
+    Validations.validateplaceOrder();
+    const currentUserId = userId;
     Commonfunctions.readData((err, data) => {
       if (err) {
         callBack(errorMessageMapping(err), null);
       } else {
-        const userId = data.userId || this.userId;
-        const jKey = data.token || this.token;
-        axiosInterceptor
-          .post(`logout`, {
-            userId,
-            jKey,
-          })
-          .then((response) => {
-            const { data } = response;
-            const finished = (error) => {
-              if (error) {
-                callBack(error, null);
-                return;
-              } else {
-                callBack(null, data);
-              }
-            };
-            this.userId = "";
-            this.token = "";
-            Commonfunctions.saveData(
-              { token: "", userId: "" },
-              "config.json",
-              finished
-            );
-          })
-          .catch((error) => {
-            callBack(handleError(error), null);
-          });
+        const userId = currentUserId;
+        checkifUserLoggedIn({ userId, jsonData: data }, (err, data) => {
+          if (err) {
+            callBack(err, null);
+          } else {
+            const jKey = data;
+            axiosInterceptor
+              .post(`logout`, {
+                userId,
+                jKey,
+              })
+              .then((response) => {
+                const { data } = response;
+                const finished = (error) => {
+                  if (error) {
+                    callBack(error, null);
+                    return;
+                  } else {
+                    callBack(null, data);
+                  }
+                };
+                delete jsonObj[userId];
+                Commonfunctions.saveData(
+                  { ...jsonObj },
+                  "config.json",
+                  finished
+                );
+              })
+              .catch((error) => {
+                callBack(handleError(error), null);
+              });
+          }
+        });
       }
     });
   }
