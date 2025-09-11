@@ -1,3 +1,11 @@
+🚨 **DEPRECATED** 🚨
+
+This repository is no longer maintained. Please see [Developer Node js](https://github.com/the-firstock/firstock-developer-sdk-nodejs) for the latest updates and support.
+
+- Issues and pull requests are now closed.
+- Please migrate to [Developer Node js](https://github.com/the-firstock/firstock-developer-sdk-nodejs).
+
+
 # The Firstock Connect API Nodejs client - v3
 
 To communicate with the Firstock Connect API using Nodejs, you can use the official Nodejs client library provided by Firstock.
@@ -137,3 +145,4 @@ ws.on("message", function message(data) {
 ## Changelog
 
 Check release notes.
+
